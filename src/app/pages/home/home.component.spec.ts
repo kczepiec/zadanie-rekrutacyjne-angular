@@ -57,16 +57,4 @@ describe('HomeComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
-  it('should call fetchData on initialization', () => {
-    const fetchDataSpy = spyOn(component, 'fetchData');
-    component.fetchData();
-    expect(fetchDataSpy).toHaveBeenCalled();
-  });
-
-  it('should fetchData be called', () => {
-    const fetchDataSpy = spyOn(component, 'fetchData');
-    component.fetchData();
-    expect(fetchDataSpy).toHaveBeenCalled();
-  });
 });

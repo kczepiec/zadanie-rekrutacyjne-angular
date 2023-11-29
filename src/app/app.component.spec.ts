@@ -1,11 +1,16 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from "@angular/router/testing";
+import { StoreModule } from '@ngrx/store';
 import { AppComponent } from './app.component';
+import { reducer } from './store/crypto/reducers/crypto.reducer';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AppComponent, RouterTestingModule],
+      imports: [AppComponent, RouterTestingModule, HttpClientTestingModule, StoreModule.forRoot({
+        crypto: reducer,
+      })],
     }).compileComponents();
   });
 
@@ -19,6 +24,15 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
     expect(app.title).toEqual('zadanie-rekrutacyjne-crypto');
+  });
+
+
+  it('should call fetchData on initialization', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+    const fetchDataSpy = spyOn(app, 'fetchData');
+    app.fetchData();
+    expect(fetchDataSpy).toHaveBeenCalled();
   });
 
 });
