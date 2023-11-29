@@ -1,0 +1,62 @@
+<div class="fixed top-0 right-0 left-0">
+  <div class="container mx-auto">
+    <div
+      class="w-full h-20 px-5 lg:px-0 flex items-center justify-between bg-white border-b border-zinc-200"
+    >
+      <div class="flex items-center gap-5">
+        <div class="flex">
+          <logo></logo>
+        </div>
+        <nav class="hidden lg:block">
+          <ul class="flex gap-5">
+            <li>
+              <a [routerLink]="'/'" class="text-zinc-600 hover:text-zinc-800"
+                >Cryptocurrencies</a
+              >
+            </li>
+            <li>
+              <a href="#" class="text-zinc-600 hover:text-zinc-800"
+                >Exchanges</a
+              >
+            </li>
+            <li>
+              <a href="#" class="text-zinc-600 hover:text-zinc-800"
+                >Community</a
+              >
+            </li>
+            <li>
+              <a href="#" class="text-zinc-600 hover:text-zinc-800">Products</a>
+            </li>
+            <li>
+              <a href="#" class="text-zinc-600 hover:text-zinc-800">Learn</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="hidden lg:flex gap-3">
+        <a
+          href="#"
+          class="px-4 py-2 border border-[#5241AB] text-[#5241AB] rounded-md text-sm font-semibold"
+        >
+          Log in
+        </a>
+        <a
+          href="#"
+          class="px-4 py-2 bg-[#5241AB] text-white rounded-md text-sm font-semibold"
+        >
+          Sign up
+        </a>
+      </div>
+      <!-- Mobile nav -->
+      <div class="flex lg:hidden">
+        <button
+          class="w-8 h-8 rounded-md flex flex-col items-start justify-center space-y-1 border p-2"
+        >
+          <span class="w-full h-[2px] bg-zinc-400">&nbsp;</span>
+          <span class="w-1/2 h-[2px] bg-zinc-400">&nbsp;</span>
+          <span class="w-full h-[2px] bg-zinc-400">&nbsp;</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

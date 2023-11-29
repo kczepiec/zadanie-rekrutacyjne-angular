@@ -1,0 +1,122 @@
+<main class="container mx-auto px-5 lg:px-0">
+  @if (crypto) {
+  <div class="flex justify-end items-center gap-2 mb-10">
+    <div class="flex items-center p-3 px-5 rounded-full border gap-2">
+      <app-favorite-button [crypto]="crypto" [showLabel]="true" />
+    </div>
+  </div>
+  <div class="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+    <stats-box title="Rank" [value]="crypto.rank"></stats-box>
+    <stats-box title="Name" [value]="crypto.name"></stats-box>
+    <stats-box title="Symbol" [value]="crypto.symbol"></stats-box>
+    <stats-box
+      title="Price"
+      [value]="crypto.quotes.USD.price | truncatePrice"
+    ></stats-box>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mt-5">
+    <div class="lg:col-span-1 w-full flex flex-col justify-start gap-5">
+      <stats-box
+        title="Market Cap"
+        [value]="crypto.quotes.USD.market_cap | truncatePrice"
+        [valueChange]="crypto.quotes.USD.market_cap_change_24h"
+      ></stats-box>
+
+      <stats-box
+        title="Volume 24h"
+        [value]="crypto.quotes.USD.volume_24h | truncatePrice"
+        [valueChange]="crypto.quotes.USD.volume_24h_change_24h"
+      ></stats-box>
+
+      <stats-box
+        title="ATH Price"
+        [value]="crypto.quotes.USD.ath_price | truncatePrice"
+      ></stats-box>
+      <stats-box
+        title="ATH Date"
+        [value]="crypto.quotes.USD.ath_date | dateFormat"
+      ></stats-box>
+    </div>
+    <div class="lg:col-span-3 w-full">
+      <div class="flex flex-col space-y-4 p-5 rounded-xl border">
+        <h2 class="text-xl font-semibold">Additional information</h2>
+        <div class="flex justify-between">
+          <span>Circulating Supply</span>
+          <span class="font-bold">{{ crypto.circulating_supply }}</span>
+        </div>
+        <div class="flex justify-between">
+          <span>Total Supply</span>
+          <span class="font-bold">{{ crypto.total_supply }}</span>
+        </div>
+        <div class="flex justify-between">
+          <span>Max Supply</span>
+          <span class="font-bold">{{ crypto.max_supply }}</span>
+        </div>
+        <div class="flex justify-between">
+          <span>First data at</span>
+          <span class="font-bold">{{ crypto.first_data_at | dateFormat }}</span>
+        </div>
+        <div class="flex justify-between">
+          <span>Last updated at</span>
+          <span class="font-bold">{{ crypto.last_updated | dateFormat }}</span>
+        </div>
+        <h2 class="text-xl font-semibold">Percent change</h2>
+        <div class="flex justify-between">
+          <span>Percent change (15m)</span>
+          <span class="font-bold">{{
+            crypto.quotes.USD.percent_change_15m
+          }}</span>
+        </div>
+        <div class="flex justify-between">
+          <span>Percent change (30m)</span>
+          <span class="font-bold">{{
+            crypto.quotes.USD.percent_change_30m
+          }}</span>
+        </div>
+        <div class="flex justify-between">
+          <span>Percent change (1h)</span>
+          <span class="font-bold">{{
+            crypto.quotes.USD.percent_change_1h
+          }}</span>
+        </div>
+        <div class="flex justify-between">
+          <span>Percent change (6h)</span>
+          <span class="font-bold">{{
+            crypto.quotes.USD.percent_change_6h
+          }}</span>
+        </div>
+        <div class="flex justify-between">
+          <span>Percent change (12h)</span>
+          <span class="font-bold">{{
+            crypto.quotes.USD.percent_change_12h
+          }}</span>
+        </div>
+        <div class="flex justify-between">
+          <span>Percent change (24h)</span>
+          <span class="font-bold">{{
+            crypto.quotes.USD.percent_change_24h
+          }}</span>
+        </div>
+        <div class="flex justify-between">
+          <span>Percent change (7d)</span>
+          <span class="font-bold">{{
+            crypto.quotes.USD.percent_change_7d
+          }}</span>
+        </div>
+        <div class="flex justify-between">
+          <span>Percent change (30d)</span>
+          <span class="font-bold">{{
+            crypto.quotes.USD.percent_change_30d
+          }}</span>
+        </div>
+        <div class="flex justify-between">
+          <span>Percent change (1y)</span>
+          <span class="font-bold">{{
+            crypto.quotes.USD.percent_change_1y
+          }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  }
+</main>

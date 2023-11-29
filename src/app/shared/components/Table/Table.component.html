@@ -1,0 +1,86 @@
+<div class="w-full container mx-auto">
+  @if (cryptoFacade) {
+  <table class="w-full">
+    <thead>
+      <tr class="hidden md:table-row">
+        <th></th>
+        <th class="text-center">#</th>
+        <th class="text-left">Name</th>
+        <th class="text-right">Price</th>
+        <th class="text-right">1h%</th>
+        <th class="text-right">24h%</th>
+        <th class="text-right">7d%</th>
+        <th class="text-right">Market Cap</th>
+        <th class="text-right">Volume (24h)</th>
+        <th class="text-right">Cirulating Supply</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        class="flex flex-col flex-no wrap md:table-row border-b border-zinc-200"
+        *ngFor="let crypto of crypto$ | async"
+      >
+        <td>
+          <app-favorite-button [crypto]="crypto" />
+        </td>
+        <td class="md:text-center py-2">
+          <span class="font-bold mr-full md:hidden">Rank</span>
+          {{ crypto.rank }}
+        </td>
+        <td class="md:text-left py-2">
+          <div class="flex gap-2">
+            <div class="flex w-6 h-6">
+              @if (crypto.symbol) {
+              <svg-icon
+                class="w-full h-full"
+                [iconName]="crypto.symbol"
+              ></svg-icon>
+              }
+            </div>
+            <div class="flex items-center gap-1">
+              <a [routerLink]="['/crypto/', crypto.id]" class="font-bold">{{
+                crypto.name
+              }}</a>
+              <span class="text-sm text-zinc-600">{{ crypto.symbol }}</span>
+            </div>
+          </div>
+        </td>
+        <td class="flex justify-between md:table-cell md:text-right">
+          <span class="font-bold mr-full md:hidden">Price</span>
+          {{ crypto.quotes.USD.price | truncatePrice }}
+        </td>
+        <td class="flex justify-between md:table-cell md:text-right">
+          <span class="font-bold mr-full md:hidden">1h%</span>
+          <span [percentageChange]="crypto.quotes.USD.percent_change_1h"
+            >{{ crypto.quotes.USD.percent_change_1h }}%</span
+          >
+        </td>
+        <td class="flex justify-between md:table-cell md:text-right">
+          <span class="font-bold mr-full md:hidden">24h%</span>
+          <span [percentageChange]="crypto.quotes.USD.percent_change_24h"
+            >{{ crypto.quotes.USD.percent_change_24h }}%</span
+          >
+        </td>
+        <td class="flex justify-between md:table-cell md:text-right">
+          <span class="font-bold mr-full md:hidden">7d%</span>
+          <span [percentageChange]="crypto.quotes.USD.percent_change_7d"
+            >{{ crypto.quotes.USD.percent_change_7d }}%</span
+          >
+        </td>
+        <td class="flex justify-between md:table-cell md:text-right">
+          <span class="font-bold mr-full md:hidden">Market Cap</span>
+          {{ crypto.quotes.USD.market_cap }}
+        </td>
+        <td class="flex justify-between md:table-cell md:text-right">
+          <span class="font-bold mr-full md:hidden">Volume (24h)</span>
+          {{ crypto.quotes.USD.volume_24h_change_24h }}
+        </td>
+        <td class="flex justify-between md:table-cell md:text-right">
+          <span class="font-bold mr-full md:hidden">Cirulating Supply</span>
+          {{ crypto.circulating_supply }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  }
+</div>
