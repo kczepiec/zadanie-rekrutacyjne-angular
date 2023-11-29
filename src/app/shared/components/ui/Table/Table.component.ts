@@ -10,13 +10,13 @@ import {
 import { RouterLink } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { Observable, Subject, of, takeUntil } from 'rxjs';
-import { Crypto } from '../../../interfaces/Crypto.interface';
-import { PercentageChangeDirective } from '../../directives/PercentageChange.directive';
-import { CryptoFacade } from '../../facades/Crypto.facade';
-import { TruncatePricePipe } from '../../pipes/TruncatePrice.pipe';
-import { CryptoService } from '../../services/Crypto.service';
-import { FavoriteButtonComponent } from '../common/FavoriteButton/FavoriteButton.component';
-import { SvgIconComponent } from '../common/SvgIcon/Svg-Icon.component';
+import { Crypto } from '../../../../interfaces/Crypto.interface';
+import { PercentageChangeDirective } from '../../../directives/PercentageChange.directive';
+import { CryptoFacade } from '../../../facades/Crypto.facade';
+import { TruncatePricePipe } from '../../../pipes/TruncatePrice.pipe';
+import { CryptoService } from '../../../services/Crypto.service';
+import { FavoriteButtonComponent } from '../../common/FavoriteButton/FavoriteButton.component';
+import { SvgIconComponent } from '../../common/SvgIcon/Svg-Icon.component';
 
 @Component({
   selector: 'app-table',

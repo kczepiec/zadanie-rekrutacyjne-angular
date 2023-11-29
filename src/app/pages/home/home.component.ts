@@ -2,10 +2,10 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, type OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { TableComponent } from '../../shared/components/Table/Table.component';
+import { TableComponent } from '../../shared/components/ui/Table/Table.component';
+import { PercentageChangeDirective } from '../../shared/directives/PercentageChange.directive';
 import { CryptoService } from '../../shared/services/Crypto.service';
 import { loadCryptosSuccess } from '../../store/crypto/actions/crypto.actions';
-import { PercentageChangeDirective } from '../../shared/directives/PercentageChange.directive';
 
 @Component({
   selector: 'app-home',

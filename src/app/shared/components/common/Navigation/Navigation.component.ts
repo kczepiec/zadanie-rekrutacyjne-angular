@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, type OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { LogoComponent } from '../common/Logo/Logo.component';
+import { LogoComponent } from '../Logo/Logo.component';
 
 @Component({
   selector: 'ui-navigation',
