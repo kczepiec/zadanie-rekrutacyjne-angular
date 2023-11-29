@@ -19,7 +19,7 @@ import { loadCryptosSuccess } from '../../store/crypto/actions/crypto.actions';
 export class HomeComponent implements OnInit {
   constructor(
     private readonly cryptoService: CryptoService,
-    private store: Store
+    private readonly store: Store
   ) {}
 
   ngOnInit(): void {

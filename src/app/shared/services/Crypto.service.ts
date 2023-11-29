@@ -1,6 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import data from '../../../assets/data/tickers.json';
+import { Observable } from 'rxjs';
 import { Crypto } from '../../interfaces/Crypto.interface';
 
 @Injectable({
@@ -8,7 +8,7 @@ import { Crypto } from '../../interfaces/Crypto.interface';
 })
 export class CryptoService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   /**
    * Returns the Crypto list.
@@ -16,7 +16,7 @@ export class CryptoService {
    * @returns An Observable of Crypto array representing the crypto list.
    */
   getCryptoList(): Observable<Crypto[]> {
-    return of(data);
+    return this.http.get<Crypto[]>('assets/data/tickers.json');
   }
 
 }

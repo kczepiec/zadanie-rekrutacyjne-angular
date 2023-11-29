@@ -18,9 +18,9 @@ import { selectCryptoById } from '../../store/crypto/selectors/crypto.selector';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CryptoComponent implements OnInit {
-  private cryptoId: string = '';
+  public cryptoId: string = '';
 
-  protected crypto: Crypto | undefined;
+  public crypto: Crypto | undefined;
 
   constructor(private activatedRoute: ActivatedRoute, private store: Store) {}
 
