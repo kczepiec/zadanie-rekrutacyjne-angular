@@ -2,7 +2,7 @@ import { Action, createReducer, on } from '@ngrx/store';
 import * as CryptoActions from '../actions/crypto.actions';
 import { CryptoState, cryptoInitialState } from '../config';
 
-const cryptoReducer = createReducer(
+export const cryptoReducer = createReducer(
   cryptoInitialState,
   on(CryptoActions.loadCryptosSuccess, (state, { crypto }) => {
     return {
@@ -22,10 +22,10 @@ const cryptoReducer = createReducer(
       favorites: [...state.favorites, { crypto, id: crypto.id }],
     }
   }),
-  on(CryptoActions.removeFromFavorites, (state, { crypto }) => {
+  on(CryptoActions.removeFromFavoritesSuccess, (state, { cryptoId }) => {
     return {
       ...state,
-      favorites: state.favorites.filter((favorite) => favorite.crypto.id !== crypto.id),
+      favorites: state.favorites.filter((favorite) => favorite.crypto.id !== cryptoId),
     }
   }),
 );

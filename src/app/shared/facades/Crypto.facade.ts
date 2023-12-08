@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
 import { Crypto } from '../../interfaces/Crypto.interface';
 import { addToFavorites, removeFromFavorites } from '../../store/crypto/actions/crypto.actions';
 import { CryptoState } from '../../store/crypto/config';
@@ -14,11 +13,20 @@ export class CryptoFacade {
   constructor(private readonly store: Store<CryptoState>, private readonly cryptoService: CryptoService) {}
 
   /**
-   * Returns the Crypto list.
+   * Fetching crypto list.
    *
    * @returns An Observable of Crypto array representing the crypto list.
    */
-  getCryptoList(): Observable<Crypto[]> {
+  // fetchCryptoList() {
+  //   return this.store.dispatch(loadCryptos());
+  // }
+
+  /**
+   * Geting crypto list.
+   *
+   * @returns An Observable of Crypto array representing the crypto list.
+   */
+  getCryptoList() {
     return this.store.select(selectCryptoList);
   }
 
@@ -36,7 +44,7 @@ export class CryptoFacade {
    *
    * @param crypto The crypto to remove from the favorites list.
    */
-  removeFromFavorites(crypto: Crypto) {
-    return this.store.dispatch(removeFromFavorites({ crypto }))
+  removeFromFavorites(cryptoId: string) {
+    return this.store.dispatch(removeFromFavorites({ cryptoId }));
   }
 }

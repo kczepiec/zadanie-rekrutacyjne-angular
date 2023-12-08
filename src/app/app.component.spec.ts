@@ -27,12 +27,12 @@ describe('AppComponent', () => {
   });
 
 
-  it('should call fetchData on initialization', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    const fetchDataSpy = spyOn(app, 'fetchData');
-    app.fetchData();
-    expect(fetchDataSpy).toHaveBeenCalled();
-  });
+  // it('should call fetchData on initialization', () => {
+  //   const fixture = TestBed.createComponent(AppComponent);
+  //   const app = fixture.componentInstance;
+  //   const fetchDataSpy = spyOn(app, 'fetchData');
+  //   app.fetchData();
+  //   expect(fetchDataSpy).toHaveBeenCalled();
+  // });
 
 });

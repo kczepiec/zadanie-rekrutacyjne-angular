@@ -7,7 +7,7 @@ import { PercentageChangeDirective } from '../../../directives/PercentageChange.
   standalone: true,
   imports: [
     CommonModule,
-    PercentageChangeDirective
+    PercentageChangeDirective,
   ],
   templateUrl: './StatsBox.component.html',
   styleUrl: './StatsBox.component.scss',

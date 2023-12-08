@@ -30,5 +30,13 @@ export const addToFavoritesSuccess = createAction(
 // Action to remove a cryptocurrency from favorites
 export const removeFromFavorites = createAction(
   '[Crypto] Remove from Favorites',
-  props<{ crypto: Crypto }>()
+  props<{ cryptoId: string }>()
 );
+
+export const removeFromFavoritesSuccess = createAction(
+  '[Crypto] Remove from Favorites Success',
+  props<{ cryptoId: string }>()
+);
+
+export const getCryptoById = createAction('[Crypto] Get crypto by id');
+export const getCryptoByIdSuccess = createAction('[Crypto] Get crypto by id', props<{ crypto: Crypto }>());

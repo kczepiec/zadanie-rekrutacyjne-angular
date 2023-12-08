@@ -2,15 +2,10 @@
 
 import { CommonModule } from '@angular/common';
 import {
-  ChangeDetectionStrategy,
-  Component,
-  OnDestroy,
-  OnInit,
+  Component
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { Observable, Subject, of, takeUntil } from 'rxjs';
-import { Crypto } from '../../../../interfaces/Crypto.interface';
 import { PercentageChangeDirective } from '../../../directives/PercentageChange.directive';
 import { CryptoFacade } from '../../../facades/Crypto.facade';
 import { TruncatePricePipe } from '../../../pipes/TruncatePrice.pipe';
@@ -32,37 +27,15 @@ import { SvgIconComponent } from '../../common/SvgIcon/Svg-Icon.component';
   ],
   providers: [CryptoService],
   templateUrl: './Table.component.html',
-  styleUrl: './Table.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  styleUrl: './Table.component.scss'
 })
-export class TableComponent implements OnInit, OnDestroy {
-  /**
-   * Crypto list.
-   */
-  protected crypto$: Observable<Crypto[]> = of([]);
-
-  /**
-   * Destroy subject.
-   */
-  private destroy$ = new Subject<void>();
-
+export class TableComponent {
   constructor(
     protected readonly cryptoFacade: CryptoFacade,
   ) {}
 
-  ngOnInit() {
-    this.fetchCryptoList();
-  }
-
-  fetchCryptoList() {
-    this.crypto$ = this.cryptoFacade
-      .getCryptoList()
-      .pipe(takeUntil(this.destroy$));
-  }
-
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
+  get cryptoList() {
+    return this.cryptoFacade.getCryptoList();
   }
 
 }

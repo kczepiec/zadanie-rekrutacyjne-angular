@@ -1,5 +1,8 @@
-<main class="container mx-auto px-5 lg:px-0">
-  @if (crypto) {
+@if(getCryptoDetails$) {
+<main
+  class="container mx-auto px-5 lg:px-0"
+  *ngIf="getCryptoDetails$ | async as crypto"
+>
   <div class="flex justify-end items-center gap-2 mb-10">
     <div class="flex items-center p-3 px-5 rounded-full border gap-2">
       <app-favorite-button [crypto]="crypto" [showLabel]="true" />
@@ -118,5 +121,6 @@
       </div>
     </div>
   </div>
-  }
 </main>
+
+}

@@ -4,7 +4,10 @@
   <fa-icon [icon]="faStarRegular"></fa-icon>
 </button>
 } @else {
-<button (click)="removeFromFavorites(crypto)" class="flex items-center gap-2">
+<button
+  (click)="removeFromFavorites(crypto.id)"
+  class="flex items-center gap-2"
+>
   <span *ngIf="showLabel" class="font-semibold">Remove from favorites</span>
   <fa-icon [icon]="faStarSolid"></fa-icon>
 </button>

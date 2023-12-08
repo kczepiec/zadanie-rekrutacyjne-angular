@@ -65,8 +65,8 @@ export class FavoriteButtonComponent implements OnInit {
    * Removes a crypto from the favorites list.
    * @param crypto Crypto to remove from the favorites list.
    */
-  removeFromFavorites(crypto: Crypto) {
-    this.cryptoFacade.removeFromFavorites(crypto);
+  removeFromFavorites(cryptoId: string) {
+    this.cryptoFacade.removeFromFavorites(cryptoId);
   }
 
   /**

@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, type OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { Crypto } from '../../interfaces/Crypto.interface';
 import { FavoriteButtonComponent } from '../../shared/components/common/FavoriteButton/FavoriteButton.component';
 import { StatsBoxComponent } from '../../shared/components/common/StatsBox/StatsBox.component';
@@ -17,40 +18,14 @@ import { selectCryptoById } from '../../store/crypto/selectors/crypto.selector';
   styleUrl: './crypto.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CryptoComponent implements OnInit {
-  public cryptoId: string = '';
-
-  public crypto: Crypto | undefined;
+export class CryptoComponent {
 
   constructor(private activatedRoute: ActivatedRoute, private store: Store) {}
-
-  ngOnInit(): void {
-    this.loadComponent();
-  }
-
-  /**
-   * Load component.
-   */
-  loadComponent(): void {
-    this.getCryptoFromParams();
-    this.getCryptoDetails();
-  }
-
-  /**
-   * Get crypto id from params.
-   */
-  getCryptoFromParams(): void {
-    this.activatedRoute.params.subscribe(
-      (params) => (this.cryptoId = params['id'])
-    );
-  }
 
   /**
    * Get crypto details from store.
    */
-  getCryptoDetails(): void {
-    this.store
-      .select(selectCryptoById(this.cryptoId))
-      .subscribe((crypto) => (this.crypto = crypto));
+  get getCryptoDetails$(): Observable<Crypto | undefined> {
+    return this.store.select(selectCryptoById(this.activatedRoute.snapshot.params['id']));
   }
 }
