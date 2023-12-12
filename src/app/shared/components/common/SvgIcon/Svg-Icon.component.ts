@@ -1,52 +1,50 @@
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import {
+  ChangeDetectorRef,
   Component,
+  DestroyRef,
   Inject,
   Input,
-  OnDestroy,
   OnInit,
   PLATFORM_ID,
+  inject
 } from '@angular/core';
-import { Subject, Subscription, takeUntil } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { SafeHtmlPipe } from '../../../pipes/SafeHtml.pipe';
 import { IconsService } from '../../../services/Icons.service';
-
 @Component({
   selector: 'svg-icon',
   standalone: true,
   imports: [CommonModule, SafeHtmlPipe],
   template:
-    '@if(isBrowser){<svg [innerHTML]="svgContent | safeHtml" class="w-full h-full"></svg>}',
+    `<svg [innerHTML]="svgContent | safeHtml" *ngIf="isBrowser" class="w-full h-full"></svg>`,
   styleUrls: ['./Svg-Icon.component.scss'],
 })
-export class SvgIconComponent implements OnInit, OnDestroy {
+export class SvgIconComponent implements OnInit {
   @Input() iconName: string = '';
   public svgContent: string = '';
   public isBrowser: boolean;
 
-  private destroy$: Subject<void> = new Subject<void>();
-
-  protected iconSvg$!: Subscription;
+  private destroyRef = inject(DestroyRef);
 
   constructor(
     private iconsService: IconsService,
+    private cdr: ChangeDetectorRef,
     @Inject(PLATFORM_ID) platformId: Object
   ) {
     this.isBrowser = isPlatformBrowser(platformId);
   }
 
   ngOnInit() {
-    this.iconSvg$ = this.iconsService
+    this.iconsService
       .getSvg(this.iconName)
-      .pipe(takeUntil(this.destroy$))
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(
-        (svg) => (this.svgContent = svg),
+        (svg) => {
+          this.svgContent = svg;
+          this.cdr.detectChanges(); // Detect changes on route change
+        },
         (err) => console.error(`Error loading SVG: ${this.iconName}`, err)
       );
-  }
-
-  ngOnDestroy() {
-    this.destroy$.next();
-    this.destroy$.complete();
   }
 }

@@ -1,11 +1,11 @@
 // crypto.effects.ts
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, switchMap, withLatestFrom } from 'rxjs/operators';
+import { catchError, filter, map, switchMap, withLatestFrom } from 'rxjs/operators';
 
 import { routerNavigatedAction } from '@ngrx/router-store';
 import { Store } from '@ngrx/store';
-import { EMPTY, of } from 'rxjs';
+import { of } from 'rxjs';
 import { CryptoService } from '../../../shared/services/Crypto.service';
 import * as CryptoActions from '../actions/crypto.actions';
 import { selectCryptoList } from '../selectors/crypto.selector';
@@ -21,16 +21,12 @@ export class CryptoEffects {
   /**
    * Loads the crypto list.
    */
-  loadCrypto$ = createEffect(() =>
+   loadCrypto$ = createEffect(() =>
     this.actions$.pipe(
       ofType(routerNavigatedAction),
       withLatestFrom(this.store.select(selectCryptoList)),
-      switchMap(([_, cryptos]) => {
-        if (cryptos.length === 0) {
-          return this._loadCryptosFromService();
-        }
-        return EMPTY;
-      }),
+      filter(([_, cryptos]) => cryptos.length === 0),
+      switchMap(() => this._loadCryptosFromService()),
       catchError(this._handleError)
     )
   );
@@ -62,7 +58,7 @@ export class CryptoEffects {
       switchMap(({ crypto }) =>
         of(CryptoActions.addToFavoritesSuccess({ crypto }))
       ),
-      catchError((error) => of(error))
+      catchError((error) => of(CryptoActions.loadCryptosFailure({ error })))
     );
   });
 
@@ -76,7 +72,8 @@ export class CryptoEffects {
       switchMap(({ cryptoId }) =>
         of(CryptoActions.removeFromFavoritesSuccess({ cryptoId }))
       ),
-      catchError((error) => of(error))
+      catchError((error) => of(CryptoActions.loadCryptosFailure({ error })))
     );
   });
+
 }
