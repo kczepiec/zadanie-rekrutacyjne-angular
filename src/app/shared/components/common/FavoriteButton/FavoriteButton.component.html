@@ -1,12 +1,15 @@
 @if(checkIfCryptoIsFavorite(crypto.id) && (isFavorite$ | async) === false) {
-<button (click)="addToFavorites(crypto)" class="flex items-center gap-2">
+<button
+  (click)="addToFavorites(crypto)"
+  class="flex items-center gap-2 hover:text-[#5241AB]"
+>
   <span *ngIf="showLabel" class="font-semibold">Add to favorites</span>
   <fa-icon [icon]="faStarRegular"></fa-icon>
 </button>
 } @else {
 <button
   (click)="removeFromFavorites(crypto.id)"
-  class="flex items-center gap-2"
+  class="flex items-center gap-2 hover:text-[#5241AB]"
 >
   <span *ngIf="showLabel" class="font-semibold">Remove from favorites</span>
   <fa-icon [icon]="faStarSolid"></fa-icon>

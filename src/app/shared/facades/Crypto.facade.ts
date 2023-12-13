@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Crypto } from '../../interfaces/Crypto.interface';
-import { addToFavorites, removeFromFavorites } from '../../store/crypto/actions/crypto.actions';
+import { addToFavorites, loadCryptos, removeFromFavorites } from '../../store/crypto/actions/crypto.actions';
 import { CryptoState } from '../../store/crypto/config';
 import { selectCryptoList } from '../../store/crypto/selectors/crypto.selector';
 import { CryptoService } from '../services/Crypto.service';
@@ -17,9 +17,9 @@ export class CryptoFacade {
    *
    * @returns An Observable of Crypto array representing the crypto list.
    */
-  // fetchCryptoList() {
-  //   return this.store.dispatch(loadCryptos());
-  // }
+  fetchCryptoList() {
+    return this.store.dispatch(loadCryptos());
+  }
 
   /**
    * Geting crypto list.

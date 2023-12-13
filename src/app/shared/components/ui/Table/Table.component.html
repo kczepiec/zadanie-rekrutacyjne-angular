@@ -17,13 +17,13 @@
     </thead>
     <tbody>
       <tr
-        class="flex flex-col flex-no wrap md:table-row border-b border-zinc-200"
+        class="flex flex-col space-y-2 flex-no wrap md:table-row border-b border-zinc-200 pb-3 mb-3"
         *ngFor="let crypto of cryptoList | async"
       >
         <td>
           <app-favorite-button [crypto]="crypto" />
         </td>
-        <td class="md:text-center py-2">
+        <td class="md:text-center py-2 text-lg md:text-base">
           <span class="font-bold mr-full md:hidden">Rank</span>
           {{ crypto.rank }}
         </td>
@@ -38,9 +38,11 @@
               }
             </div>
             <div class="flex items-center gap-1">
-              <a [routerLink]="['/crypto/', crypto.id]" class="font-bold">{{
-                crypto.name
-              }}</a>
+              <a
+                [routerLink]="['/crypto/', crypto.id]"
+                class="font-bold hover:text-[#5241AB] duration-100"
+                >{{ crypto.name }}</a
+              >
               <span class="text-sm text-zinc-600">{{ crypto.symbol }}</span>
             </div>
           </div>

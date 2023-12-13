@@ -2,7 +2,7 @@
 
 import { CommonModule } from '@angular/common';
 import {
-  Component
+  Component, OnInit
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -29,10 +29,14 @@ import { SvgIconComponent } from '../../common/SvgIcon/Svg-Icon.component';
   templateUrl: './Table.component.html',
   styleUrl: './Table.component.scss'
 })
-export class TableComponent {
+export class TableComponent implements OnInit {
   constructor(
     protected readonly cryptoFacade: CryptoFacade,
-  ) {}
+  ) { }
+
+  ngOnInit(): void {
+    // this.cryptoFacade.fetchCryptoList(); // -> This is a second idea to fetch data from API instead of using ngrx navigated action.
+  }
 
   get cryptoList() {
     return this.cryptoFacade.getCryptoList();
